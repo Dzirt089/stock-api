@@ -8,7 +8,7 @@ namespace OzonEdu.StockApi.GrpcServices
     public class StockApiGrpcService : StockApiGrpc.StockApiGrpcBase
     {
         private readonly IStockService _stockService;
-
+        
         public StockApiGrpcService(IStockService stockService)
         {
             _stockService = stockService;
@@ -59,9 +59,49 @@ namespace OzonEdu.StockApi.GrpcServices
         }
 
         public override Task<Empty> AddStockItem(AddStockItemRequest request, ServerCallContext context)
-        {
+        {            
             throw new RpcException(new Status(StatusCode.InvalidArgument, "validation failed"),
                 new Metadata { new Metadata.Entry("key","our value")});
+        }
+
+        public override async Task GetAllStockItemsStreaming(
+            GetAllStockItemsRequest request, 
+            IServerStreamWriter<GetAllStockItemsResponseUnit> responseStream, 
+            ServerCallContext context)
+        {
+            var stockItems = await _stockService.GetAll(context.CancellationToken);
+            foreach(var item in stockItems)
+            {
+                if (context.CancellationToken.IsCancellationRequested)
+                {
+                    break;
+                }
+
+                await responseStream.WriteAsync(new GetAllStockItemsResponseUnit
+                {
+                    ItemId = item.Id,
+                    ItemName = item.ItemName,
+                    Quantity = item.Qiantity
+                });
+            }
+        }
+
+        public override async Task<Empty> AddStockItemsStreaming
+            (IAsyncStreamReader<AddStockItemRequest> requestStream, 
+            ServerCallContext context)
+        {
+            while (!context.CancellationToken.IsCancellationRequested)
+            {
+                await requestStream.MoveNext();
+                var currentItem = requestStream.Current;
+
+                await _stockService.Add(new StockItemCreationModel 
+                { 
+                    Qiantity = currentItem.Quantity,
+                    ItemName = currentItem.ItemName,
+                }, context.CancellationToken);
+            }
+            return new Empty();
         }
     }
 }

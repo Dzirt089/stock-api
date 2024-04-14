@@ -12,6 +12,9 @@ service StockApiGrpc{
 	rpc GetAllStockItemsMap (google.protobuf.Empty) returns (GetAllStockItemsMapResponse);
 
 	rpc AddStockItem (AddStockItemRequest) returns (google.protobuf.Empty);
+
+	rpc GetAllStockItemsStreaming (GetAllStockItemsRequest) returns (stream GetAllStockItemsResponseUnit); 
+	rpc AddStockItemsStreaming (stream AddStockItemRequest) returns (google.protobuf.Empty); 
 }
 
 message GetAllStockItemsRequest{
@@ -45,4 +48,10 @@ message GetAllStockItemsMapResponse{
 message AddStockItemRequest{
 	string item_name = 1;
 	int32 quantity = 2;
+}
+
+enum StockType {
+	NONE = 0;
+	T_SHIRT = 1;
+	SHOES = 2;
 }
