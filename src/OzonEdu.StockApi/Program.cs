@@ -12,7 +12,7 @@ builder.Services.AddControllers(optionals => optionals.Filters.Add<GlobalExcepti
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IStockService, StockService>();
-builder.Services.AddGrpc();
+builder.Services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
 
 var app = builder.Build();
 
