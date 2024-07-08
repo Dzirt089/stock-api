@@ -8,16 +8,16 @@ using OzonEdu.StockApi.Grpc;
 var channel = GrpcChannel.ForAddress("http://localhost:5099");
 var client = new StockApiGrpc.StockApiGrpcClient(channel);
 
-//var response = await client.GetAllStockItemsAsync(new GetAllStockItemsRequest(), cancellationToken: CancellationToken.None);
-//foreach (var item in response.Stocks)
-//{
-//    Console.WriteLine($"item id {item.ItemId} - quantity {item.Quantity}");
-//}
+var response = await client.GetAllStockItemsAsync(new GetAllStockItemsRequest(), cancellationToken: CancellationToken.None);
+foreach (var item in response.Stocks)
+{
+    Console.WriteLine($"item id {item.ItemId} - quantity {item.Quantity}");
+}
 //try
 //{
 //    await client.AddStockItemAsync(new AddStockItemRequest { ItemName = "item to add", Quantity = 1 });
 //}
-//catch(RpcException ex)
+//catch (RpcException ex)
 //{
 //    //var metadata = ex.Trailers;
 //    //metadata.FirstOrDefault(x => x.Key == "key");
@@ -37,19 +37,19 @@ var client = new StockApiGrpc.StockApiGrpcClient(channel);
 //}
 
 
-var clientStreamingCall = client.AddStockItemsStreaming(cancellationToken: CancellationToken.None);
+//var clientStreamingCall = client.AddStockItemsStreaming(cancellationToken: CancellationToken.None);
 
-await clientStreamingCall.RequestStream.WriteAsync(new AddStockItemRequest
-{
-    Quantity = 25,
-    ItemName = "Shoes"
-});
+//await clientStreamingCall.RequestStream.WriteAsync(new AddStockItemRequest
+//{
+//    Quantity = 25,
+//    ItemName = "Shoes"
+//});
 
-await clientStreamingCall.RequestStream.WriteAsync(new AddStockItemRequest
-{
-    Quantity = 78,
-    ItemName = "Cap"
-});
+//await clientStreamingCall.RequestStream.WriteAsync(new AddStockItemRequest
+//{
+//    Quantity = 78,
+//    ItemName = "Cap"
+//});
 
-await clientStreamingCall.RequestStream.CompleteAsync();
+//await clientStreamingCall.RequestStream.CompleteAsync();
 Console.ReadKey();

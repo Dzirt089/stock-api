@@ -63,7 +63,7 @@ namespace OzonEdu.StockApi.Controllers
         public async Task<ActionResult<StockItem>> Add(StockItemModel model, CancellationToken token)
         {
 
-           // throw new CustomException();
+            throw new CustomException();
             var createdStockItem = await _stockService.Add(new StockItemCreationModel
             {
                 ItemName = model.ItemName,

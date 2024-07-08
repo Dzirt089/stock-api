@@ -21,7 +21,7 @@
             new StockItem(1, "Толстовка", 20),
             new StockItem(1, "Кепка", 15),
         };
-
+        public Task<List<StockItem>> GetAll(CancellationToken _) => Task.FromResult(StockItems);
         public Task<StockItem> Add(StockItemCreationModel stockItem, CancellationToken token)
         {
             var itemId = StockItems.Max(x=> x.Id) + 1;
@@ -30,7 +30,7 @@
             return Task.FromResult (newStockItem);
         }
 
-        public Task<List<StockItem>> GetAll(CancellationToken _) => Task.FromResult(StockItems);
+        
         public Task<StockItem> GetById(long id, CancellationToken token)
         {
             var stockItem = StockItems.FirstOrDefault(x => x.Id == id);

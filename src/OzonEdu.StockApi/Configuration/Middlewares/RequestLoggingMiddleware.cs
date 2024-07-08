@@ -80,7 +80,7 @@ namespace OzonEdu.StockApi.Configuration.Middlewares
             {
                 _logger.LogError(ex, ex.StackTrace);
             }
-            
+
             return response;
         }
 
