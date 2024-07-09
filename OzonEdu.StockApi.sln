@@ -17,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi", "src\Ozo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi.Grpc", "OzonEdu.StockApi.Grpc\OzonEdu.StockApi.Grpc.csproj", "{C42E2B01-F835-4161-AAC5-52C7E7C7E8CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.StockApi.GrpcClient", "OzonEdu.StockApi.GrpcClient\OzonEdu.StockApi.GrpcClient.csproj", "{D640C691-6FD3-47E2-9F90-BBE975B2F2CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi.GrpcClient", "OzonEdu.StockApi.GrpcClient\OzonEdu.StockApi.GrpcClient.csproj", "{D640C691-6FD3-47E2-9F90-BBE975B2F2CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi.Domain", "OzonEdu.StockApi.Domain\OzonEdu.StockApi.Domain.csproj", "{EE047A15-2C60-4BB5-B136-1C95A46662A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.StockApi.Domain.Tests", "tests\OzonEdu.StockApi.Domain.Tests\OzonEdu.StockApi.Domain.Tests.csproj", "{8B67BC7B-3156-4878-84FF-68978BE0C94E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +41,14 @@ Global
 		{D640C691-6FD3-47E2-9F90-BBE975B2F2CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D640C691-6FD3-47E2-9F90-BBE975B2F2CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D640C691-6FD3-47E2-9F90-BBE975B2F2CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE047A15-2C60-4BB5-B136-1C95A46662A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE047A15-2C60-4BB5-B136-1C95A46662A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE047A15-2C60-4BB5-B136-1C95A46662A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE047A15-2C60-4BB5-B136-1C95A46662A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B67BC7B-3156-4878-84FF-68978BE0C94E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B67BC7B-3156-4878-84FF-68978BE0C94E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B67BC7B-3156-4878-84FF-68978BE0C94E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B67BC7B-3156-4878-84FF-68978BE0C94E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +57,8 @@ Global
 		{5009A68B-0D42-4D54-A9D8-7CBC98A32791} = {12FBFD49-809A-400F-80CF-DF8F97356157}
 		{C42E2B01-F835-4161-AAC5-52C7E7C7E8CF} = {12FBFD49-809A-400F-80CF-DF8F97356157}
 		{D640C691-6FD3-47E2-9F90-BBE975B2F2CC} = {12FBFD49-809A-400F-80CF-DF8F97356157}
+		{EE047A15-2C60-4BB5-B136-1C95A46662A1} = {12FBFD49-809A-400F-80CF-DF8F97356157}
+		{8B67BC7B-3156-4878-84FF-68978BE0C94E} = {B7692516-7D8E-4B81-B1F1-F16A057FBEA3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B70CBCE4-77A9-4BFF-9C32-FDDA45D39C43}
