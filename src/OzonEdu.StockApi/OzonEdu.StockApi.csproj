@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\OzonEdu.StockApi.Grpc\OzonEdu.StockApi.Grpc.csproj" />
+    <ProjectReference Include="..\..\OzonEdu.StockApi.Infrastructure\OzonEdu.StockApi.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

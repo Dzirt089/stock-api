@@ -2,15 +2,15 @@
 
 namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 {
-	public class Name : ValueObject
+	/// <summary>Кол-во в остатках на складе</summary>
+	public class Quantity : ValueObject
 	{
-		/// <summary>Хранилище данных для Name</summary>
-		public string Value { get; }
-
-		public Name(string name)
+		public Quantity(int value)
 		{
-			Value = name;
+			Value = value;
 		}
+
+		public int Value { get; }
 
 		/// <summary>
 		/// Определяем возврат значения каждого свойства (так как ValueObject сравнивается по значению)

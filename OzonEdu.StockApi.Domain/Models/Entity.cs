@@ -11,7 +11,7 @@ namespace OzonEdu.StockApi.Domain.Models
 	public abstract class Entity
 	{
 		protected int? _requestedHashCode;
-		public virtual long Id { get; protected set; }
+		public virtual int Id { get; protected set; }
 		private readonly List<INotification> _domainEvents = new();
 		public IReadOnlyCollection<INotification> DomainEvents => _domainEvents.AsReadOnly();
 		public void AddDomainEvent(INotification eventItem)

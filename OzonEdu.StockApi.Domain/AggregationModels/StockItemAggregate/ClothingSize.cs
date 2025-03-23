@@ -1,9 +1,4 @@
 ﻿using OzonEdu.StockApi.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 {
@@ -11,7 +6,7 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 	/// Определяем как тип перечислителя, определяющий размер одежды
 	/// Размеры уже предопределены (Или можно их получать из БД)
 	/// </summary>
-	internal class ClothingSize : Enumeration
+	public class ClothingSize : Enumeration
 	{
 		public static ClothingSize XS = new(1, nameof(XS));
 		public static ClothingSize S = new(2, nameof(S));

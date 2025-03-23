@@ -3,7 +3,7 @@
 namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 {
 	/// <summary>Складская абревиатура артикула товара (позиции)</summary>
-	internal class Sku : ValueObject
+	public class Sku : ValueObject
 	{
 		/// <summary>Подразумеваем, что артикула будет много, но не сильно</summary>
 		public long Value { get; }

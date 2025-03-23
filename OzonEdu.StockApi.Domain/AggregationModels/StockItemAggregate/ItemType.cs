@@ -1,9 +1,4 @@
 ﻿using OzonEdu.StockApi.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 {
@@ -12,7 +7,7 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 	/// <see cref="ItemType"/> Является переопределенным типом (вместо перечисления) с расширенными возможностями,
 	/// но остается таким же <see cref="ValueObject"/>
 	/// </summary>
-	internal class ItemType : Enumeration
+	public class ItemType : Enumeration
 	{
 		//Среди объектов для мерча может быть:
 		/// <summary>Футболка</summary>

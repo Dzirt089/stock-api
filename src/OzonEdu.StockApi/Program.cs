@@ -1,6 +1,8 @@
+using Microsoft.Extensions.DependencyInjection;
 using OzonEdu.StockApi.Configuration.Fillters;
 using OzonEdu.StockApi.Configuration.Middlewares;
 using OzonEdu.StockApi.GrpcServices;
+using OzonEdu.StockApi.Infrastructure.Handlers;
 using OzonEdu.StockApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IStockService, StockService>();
 builder.Services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
-
+//builder.Services.AddMediatR(typeof(CreateStockItemCommandHandler).Assembly);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
