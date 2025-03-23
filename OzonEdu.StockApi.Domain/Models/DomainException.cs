@@ -1,6 +1,9 @@
 ﻿namespace OzonEdu.StockApi.Domain.Models
 {
-
+	/// <summary>
+	/// Исключение доменной модели
+	/// </summary>
+	[Serializable]
 	public class DomainException : Exception
 	{
 		public DomainException()
