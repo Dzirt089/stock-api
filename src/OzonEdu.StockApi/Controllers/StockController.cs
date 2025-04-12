@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
+using OzonEdu.StockApi.Models;
 using OzonEdu.StockApi.Services;
+using OzonEdu.StockApi.Services.Interfaces;
 
 namespace OzonEdu.StockApi.Controllers
 {

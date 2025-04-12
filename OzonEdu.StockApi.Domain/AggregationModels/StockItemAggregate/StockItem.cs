@@ -20,7 +20,9 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 			Sku = sku;
 			Name = name;
 			ItemType = item;
-			SetClothingSite(size);
+			SetClothingSize(size);
+			Quantity = quantity;
+			MinimalQuantity = minimalQuantity;
 		}
 		/// <summary>Складская абревиатура артикула товара (позиции)</summary>
 		public Sku Sku { get; }
@@ -79,7 +81,7 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 		/// </summary>
 		/// <param name="size">Размер одежды</param>
 		/// <exception cref="Exception"></exception>
-		public void SetClothingSite(ClothingSize size)
+		public void SetClothingSize(ClothingSize size)
 		{
 			if (size is not null && (
 				ItemType.Type.Equals(StockItemAggregate.ItemType.TShirt) ||

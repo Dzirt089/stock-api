@@ -1,4 +1,5 @@
 ﻿using MediatR;
+
 using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
 
 namespace OzonEdu.StockApi.Domain.Events
@@ -11,7 +12,5 @@ namespace OzonEdu.StockApi.Domain.Events
 		}
 
 		public Sku StockItemSku { get; }
-
-
 	}
 }

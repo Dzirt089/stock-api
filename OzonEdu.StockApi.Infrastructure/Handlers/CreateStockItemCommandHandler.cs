@@ -1,6 +1,7 @@
 ﻿using MediatR;
+
 using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
-using OzonEdu.StockApi.Infrastructure.Commands.GiveOutStockItem;
+using OzonEdu.StockApi.Infrastructure.Commands.CreateStockItem;
 
 namespace OzonEdu.StockApi.Infrastructure.Handlers
 {

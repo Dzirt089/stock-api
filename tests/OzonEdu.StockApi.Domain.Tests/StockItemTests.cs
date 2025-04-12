@@ -1,9 +1,4 @@
 ﻿using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OzonEdu.StockApi.Domain.Tests
 {
@@ -46,9 +41,8 @@ namespace OzonEdu.StockApi.Domain.Tests
 
 			var valueToIncrease = -10;
 
-			//Act
 
-			//Assert
+			//Act && Assert
 			//Ловим ошибку (упрощенно для демонстрации принципа) при выполнении метода Increase
 			Assert.Throws<Exception>(() => stockItem.IncreaseQuantity(valueToIncrease));
 
