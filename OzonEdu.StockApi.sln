@@ -9,21 +9,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B7692516
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{5639ABB5-89F2-4929-B2CC-5EFB43D55370}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
 		Dockerfile = Dockerfile
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi", "src\OzonEdu.StockApi\OzonEdu.StockApi.csproj", "{5009A68B-0D42-4D54-A9D8-7CBC98A32791}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi.Grpc", "OzonEdu.StockApi.Grpc\OzonEdu.StockApi.Grpc.csproj", "{C42E2B01-F835-4161-AAC5-52C7E7C7E8CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi.Grpc", "src\OzonEdu.StockApi.Grpc\OzonEdu.StockApi.Grpc.csproj", "{C42E2B01-F835-4161-AAC5-52C7E7C7E8CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi.GrpcClient", "OzonEdu.StockApi.GrpcClient\OzonEdu.StockApi.GrpcClient.csproj", "{D640C691-6FD3-47E2-9F90-BBE975B2F2CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi.GrpcClient", "src\OzonEdu.StockApi.GrpcClient\OzonEdu.StockApi.GrpcClient.csproj", "{D640C691-6FD3-47E2-9F90-BBE975B2F2CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi.Domain", "OzonEdu.StockApi.Domain\OzonEdu.StockApi.Domain.csproj", "{EE047A15-2C60-4BB5-B136-1C95A46662A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi.Domain", "src\OzonEdu.StockApi.Domain\OzonEdu.StockApi.Domain.csproj", "{EE047A15-2C60-4BB5-B136-1C95A46662A1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OzonEdu.StockApi.Domain.Tests", "tests\OzonEdu.StockApi.Domain.Tests\OzonEdu.StockApi.Domain.Tests.csproj", "{8B67BC7B-3156-4878-84FF-68978BE0C94E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.StockApi.Infrastructure", "OzonEdu.StockApi.Infrastructure\OzonEdu.StockApi.Infrastructure.csproj", "{894ABD23-7D5D-453A-8301-8F9F38C31F85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.StockApi.Infrastructure", "src\OzonEdu.StockApi.Infrastructure\OzonEdu.StockApi.Infrastructure.csproj", "{894ABD23-7D5D-453A-8301-8F9F38C31F85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

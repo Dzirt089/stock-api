@@ -1,23 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>166c98a1-8b89-45ef-9ff7-ebeae956dbaa</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..</DockerfileContext>
+	<!-- не включать в publish контент из транзитивных (косвенных) ProjectReference -->
+	<DockerfileContext>..\..</DockerfileContext>
+	<DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.62.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.70.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\OzonEdu.StockApi.Grpc\OzonEdu.StockApi.Grpc.csproj" />
-    <ProjectReference Include="..\..\OzonEdu.StockApi.Infrastructure\OzonEdu.StockApi.Infrastructure.csproj" />
+    <ProjectReference Include="..\OzonEdu.StockApi.Grpc\OzonEdu.StockApi.Grpc.csproj" >
+		<!-- берём только код и runtime-артефакты, без contentFiles -->
+		<IncludeAssets>Compile;Runtime</IncludeAssets>
+	</ProjectReference>
+    <ProjectReference Include="..\OzonEdu.StockApi.Infrastructure\OzonEdu.StockApi.Infrastructure.csproj" > 
+        <!-- берём только код и runtime-артефакты, без contentFiles -->
+		<IncludeAssets>Compile;Runtime</IncludeAssets>
+    </ProjectReference>
   </ItemGroup>
-
+  <ItemGroup>
+	  <!-- Явное исключение файлов настроек -->
+	  <Content Remove="appsettings*.json"/>
+  </ItemGroup>
 </Project>
