@@ -1,10 +1,6 @@
 ﻿using MediatR;
-using OzonEdu.StockApi.Domain.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using OzonEdu.StockApi.Domain.AggregationModels.DomainEvents;
 
 namespace OzonEdu.StockApi.Infrastructure.Handlers
 {

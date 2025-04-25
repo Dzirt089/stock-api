@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace OzonEdu.StockApi.Domain.Models
+namespace OzonEdu.StockApi.Domain.Root
 {
 	/// <summary>
 	/// Класс перечесления вместо типов перечисления

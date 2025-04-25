@@ -1,4 +1,4 @@
-﻿using OzonEdu.StockApi.Domain.Models;
+﻿using OzonEdu.StockApi.Domain.Root;
 
 namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 {

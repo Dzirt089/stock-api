@@ -14,7 +14,7 @@ namespace OzonEdu.StockApi.Domain.Tests
 				new Item(ItemType.TShirt),
 				ClothingSize.S,
 				new Quantity(10),
-				new Quantity(5));
+				new MinimalQuantity(5));
 
 			var valueToIncrease = 10;
 
@@ -37,7 +37,7 @@ namespace OzonEdu.StockApi.Domain.Tests
 				new Item(ItemType.TShirt),
 				ClothingSize.S,
 				new Quantity(10),
-				new Quantity(5));
+				new MinimalQuantity(5));
 
 			var valueToIncrease = -10;
 

@@ -1,12 +1,13 @@
-﻿using OzonEdu.StockApi.Domain.Events;
-using OzonEdu.StockApi.Domain.Models;
+﻿using OzonEdu.StockApi.Domain.AggregationModels.DomainEvents;
+using OzonEdu.StockApi.Domain.Root;
+using OzonEdu.StockApi.Domain.Root.Exceptions.StockItemAggregate;
 
 namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 {
 	/// <summary>
 	/// Элемент на склада (Основная Domain Model)
 	/// Основной частью этого приложения является Domain элемента склада StockItem.
-	/// Наследование от Entity даёт доп. обёртку по сравнению по наличию Domain Client и всего такого. 
+	/// Наследование от Entity даёт доп. обёртку по сравнению, по наличию Domain Client и всего такого. 
 	/// </summary>
 	public class StockItem : Entity
 	{
@@ -15,15 +16,44 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 			Item item,
 			ClothingSize size,
 			Quantity quantity,
-			Quantity minimalQuantity)
+			MinimalQuantity minimalQuantity)
 		{
 			Sku = sku;
 			Name = name;
 			ItemType = item;
 			SetClothingSize(size);
-			Quantity = quantity;
+			SetQuantity(quantity);
+			SetMinimalQuantity(minimalQuantity);
+		}
+
+		/// <summary>
+		/// Установка минимального кол-ва поддерживаемого на складе
+		/// </summary>
+		/// <param name="minimalQuantity"></param>
+		/// <exception cref="ArgumentNullException"></exception>
+		/// <exception cref="NegativeValueException"></exception>
+		private void SetMinimalQuantity(MinimalQuantity minimalQuantity)
+		{
+			if (minimalQuantity is null)
+				throw new ArgumentNullException($"{nameof(minimalQuantity)} is null");
+			if (minimalQuantity.Value is not null && minimalQuantity.Value < 0)
+				throw new NegativeValueException($"{nameof(minimalQuantity)} value is negative");
+
 			MinimalQuantity = minimalQuantity;
 		}
+
+		/// <summary>
+		/// Установка кол-ва позиций на выдачу
+		/// </summary>
+		/// <param name="quantity"></param>
+		/// <exception cref="NegativeValueException"></exception>
+		private void SetQuantity(Quantity quantity)
+		{
+			if (quantity.Value < 0)
+				throw new NegativeValueException($"{nameof(quantity)} is negative");
+			Quantity = quantity;
+		}
+
 		/// <summary>Складская абревиатура артикула товара (позиции)</summary>
 		public Sku Sku { get; }
 
@@ -34,13 +64,13 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 		public Item ItemType { get; }
 
 		/// <summary>Размер позиции (футболок, носков, чего угодно)</summary>
-		public ClothingSize ClothingSize { get; private set; }
+		public ClothingSize? ClothingSize { get; private set; }
 
 		/// <summary>Кол-во в остатках на складе</summary>
 		public Quantity Quantity { get; private set; }
 
 		/// <summary>Минимальное допустимое кол-во товара на складе</summary>
-		public Quantity MinimalQuantity { get; private set; }
+		public MinimalQuantity MinimalQuantity { get; private set; }
 
 		/// <summary>Специфические тэги</summary>
 		public Tag Tag { get; set; }
@@ -53,7 +83,7 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 		public void IncreaseQuantity(int valueToIncrease)
 		{
 			if (valueToIncrease < 0)
-				throw new Exception($"{nameof(valueToIncrease)} value is negative");
+				throw new NegativeValueException($"{nameof(valueToIncrease)} value is negative");
 			Quantity = new Quantity(this.Quantity.Value + valueToIncrease);
 		}
 
@@ -65,10 +95,10 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 		public void GiveOutItems(int valueToGiveOut)
 		{
 			if (valueToGiveOut < 0)
-				throw new Exception($"{nameof(valueToGiveOut)} value is negative");
+				throw new NegativeValueException($"{nameof(valueToGiveOut)} value is negative");
 
 			if (Quantity.Value < valueToGiveOut)
-				throw new Exception("Not enough items");
+				throw new NotEnoughItemsException("Not enough items");
 
 			Quantity = new Quantity(this.Quantity.Value - valueToGiveOut);
 
@@ -90,7 +120,7 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 			else if (size is null)
 				ClothingSize = null;
 			else
-				throw new Exception($"Item with type {ItemType.Type.Name} cannot get size");
+				throw new StockItemSizeException($"Item with type {ItemType.Type.Name} cannot get size");
 		}
 
 		/// <summary>

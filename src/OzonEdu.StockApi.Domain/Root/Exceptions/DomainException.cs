@@ -1,4 +1,4 @@
-﻿namespace OzonEdu.StockApi.Domain.Models
+﻿namespace OzonEdu.StockApi.Domain.Root.Exceptions
 {
 	/// <summary>
 	/// Исключение доменной модели

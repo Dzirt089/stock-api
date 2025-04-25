@@ -7,9 +7,14 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 	/// </summary>
 	public interface IStockItemRepository : IRepository<StockItem>
 	{
-		Task<StockItem> CreateAsync(StockItem stockItem, CancellationToken cancellationToken = default);
-		Task<StockItem> UpdateAsync(StockItem stockItem, CancellationToken cancellationToken = default);
-		Task<StockItem> FindByIdAsync(Sku sku, CancellationToken cancellationToken = default);
+		/// <summary>
+		/// Найти товарную позицию по индентификатору
+		/// </summary>
+		Task<StockItem> FindByIdAsync(long id, CancellationToken cancellationToken = default);
+
+		/// <summary>
+		/// Найти товарную позицию по артикулу <see cref="Sku"/> (складской индентификатору)
+		/// </summary>
 		Task<StockItem> FindBySkuAsync(Sku sku, CancellationToken cancellationToken = default);
 	}
 }

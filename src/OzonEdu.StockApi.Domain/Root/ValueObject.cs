@@ -1,4 +1,4 @@
-﻿namespace OzonEdu.StockApi.Domain.Models
+﻿namespace OzonEdu.StockApi.Domain.Root
 {
 	/// <summary>
 	/// Объект значений. Нет уникального ID (удостоверения) и они НЕИЗМЕНЯЕМЫЕ. Сравнение по значению
@@ -32,7 +32,7 @@
 		/// <returns></returns>
 		protected static bool NotEqualOperator(ValueObject left, ValueObject right)
 		{
-			return !(EqualOperator(left, right));
+			return !EqualOperator(left, right);
 		}
 
 		/// <summary>

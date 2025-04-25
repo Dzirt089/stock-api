@@ -1,9 +1,9 @@
-﻿using OzonEdu.StockApi.Domain.Models;
+﻿using OzonEdu.StockApi.Domain.Root;
 
 namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 {
 	/// <summary>
-	/// Тип позиции (носки, сумка и т.д.)
+	/// Сущность позиции (носки, сумка и т.д.)
 	/// </summary>
 	public class Item : Entity
 	{

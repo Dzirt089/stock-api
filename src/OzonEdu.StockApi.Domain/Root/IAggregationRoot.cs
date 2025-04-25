@@ -1,4 +1,4 @@
-﻿namespace OzonEdu.StockApi.Domain.Models
+﻿namespace OzonEdu.StockApi.Domain.Root
 {
 	/// <summary>
 	/// Флаг того, что "этот" Entity может являться корнем агрегата

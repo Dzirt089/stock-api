@@ -3,6 +3,7 @@
 	public interface IUnitOfWork
 	{
 		Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+
 		/// <summary>
 		/// Комитим все изменения
 		/// </summary>

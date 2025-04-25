@@ -26,7 +26,7 @@ namespace OzonEdu.StockApi.Infrastructure.Handlers
 				new Item(request.StockItemType),
 				request.ClothingSize,
 				new Quantity(request.Quantity),
-				new Quantity((int)request.MinimalQuantity)
+				new MinimalQuantity(request.MinimalQuantity)
 				);
 
 			var createResult = await _stockItemRepository.CreateAsync(newStockItem, cancellationToken);

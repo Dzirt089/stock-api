@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace OzonEdu.StockApi.Domain.Models
+namespace OzonEdu.StockApi.Domain.Root
 {
 	/// <summary>
 	/// Сущности с изменяемыми свойствами и с уникальным ID, сравнение происходит по ID.
@@ -63,7 +63,7 @@ namespace OzonEdu.StockApi.Domain.Models
 		/// <returns></returns>
 		public bool IsTransient()
 		{
-			return Id == default(Int64);
+			return Id == default(long);
 		}
 
 		/// <summary>
@@ -102,7 +102,7 @@ namespace OzonEdu.StockApi.Domain.Models
 		/// <returns></returns>
 		public static bool operator ==(Entity left, Entity right)
 		{
-			if (Object.Equals(left, null)) return (Object.Equals(right, null)) ? true : false;
+			if (Equals(left, null)) return Equals(right, null) ? true : false;
 			else return left.Equals(right);
 		}
 

@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Grpc.Core;
 using Grpc.Net.Client;
+
 using OzonEdu.StockApi.Grpc;
 
 
@@ -11,7 +11,7 @@ var client = new StockApiGrpc.StockApiGrpcClient(channel);
 var response = await client.GetAllStockItemsAsync(new GetAllStockItemsRequest(), cancellationToken: CancellationToken.None);
 foreach (var item in response.Stocks)
 {
-    Console.WriteLine($"item id {item.ItemId} - quantity {item.Quantity}");
+	Console.WriteLine($"item id {item.ItemId} - quantity {item.Quantity}");
 }
 //try
 //{

@@ -1,9 +1,4 @@
-﻿using OzonEdu.StockApi.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OzonEdu.StockApi.Domain.Root;
 
 namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 {
