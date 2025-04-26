@@ -1,4 +1,4 @@
-﻿using OzonEdu.StockApi.Domain.AggregationModels.DomainEvents;
+﻿using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate.DomainEvents;
 using OzonEdu.StockApi.Domain.Root;
 using OzonEdu.StockApi.Domain.Root.Exceptions.StockItemAggregate;
 

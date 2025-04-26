@@ -3,7 +3,7 @@
 using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
 using OzonEdu.StockApi.Infrastructure.Commands.GiveOutStockItem;
 
-namespace OzonEdu.StockApi.Infrastructure.Handlers
+namespace OzonEdu.StockApi.Infrastructure.Handlers.StockItemAggregate
 {
 	public class GiveOutStockItemCommandHandler : IRequestHandler<GiveOutStockItemCommand>
 	{

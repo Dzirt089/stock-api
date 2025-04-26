@@ -1,9 +1,10 @@
 ﻿using MediatR;
 
-using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
-
-namespace OzonEdu.StockApi.Domain.AggregationModels.DomainEvents
+namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate.DomainEvents
 {
+	/// <summary>
+	/// Достигнуто минимальное количество товаров на складе DomainEvent
+	/// </summary>
 	public class ReachedMinimumStockItemsNumberDomainEvent : INotification
 	{
 		public ReachedMinimumStockItemsNumberDomainEvent(Sku stockItemSku)
