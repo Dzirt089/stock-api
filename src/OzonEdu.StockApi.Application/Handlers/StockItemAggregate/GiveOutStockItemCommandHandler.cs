@@ -1,9 +1,9 @@
 ﻿using MediatR;
 
+using OzonEdu.StockApi.Application.Commands.GiveOutStockItem;
 using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
-using OzonEdu.StockApi.Infrastructure.Commands.GiveOutStockItem;
 
-namespace OzonEdu.StockApi.Infrastructure.Handlers.StockItemAggregate
+namespace OzonEdu.StockApi.Application.Handlers.StockItemAggregate
 {
 	public class GiveOutStockItemCommandHandler : IRequestHandler<GiveOutStockItemCommand>
 	{

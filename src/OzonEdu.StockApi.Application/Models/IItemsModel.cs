@@ -1,4 +1,4 @@
-﻿namespace OzonEdu.StockApi.Infrastructure.Models
+﻿namespace OzonEdu.StockApi.Application.Models
 {
 	public interface IItemsModel<TItemsModel> where TItemsModel : class
 	{

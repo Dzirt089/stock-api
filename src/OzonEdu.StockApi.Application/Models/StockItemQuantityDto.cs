@@ -1,4 +1,4 @@
-﻿namespace OzonEdu.StockApi.Infrastructure.Models
+﻿namespace OzonEdu.StockApi.Application.Models
 {
 	/// <summary>
 	/// Количество товара на складе Dto

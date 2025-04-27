@@ -2,7 +2,7 @@
 
 using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate.DomainEvents;
 
-namespace OzonEdu.StockApi.Infrastructure.Handlers.DomainEvent
+namespace OzonEdu.StockApi.Application.Handlers.DomainEvent
 {
 	public class ReachedMinimumDomainEventHandler : INotificationHandler<ReachedMinimumStockItemsNumberDomainEvent>
 	{

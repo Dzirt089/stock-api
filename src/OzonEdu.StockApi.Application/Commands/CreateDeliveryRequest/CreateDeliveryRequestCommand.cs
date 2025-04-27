@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-using OzonEdu.StockApi.Infrastructure.Models;
+using OzonEdu.StockApi.Application.Models;
 
-namespace OzonEdu.StockApi.Infrastructure.Commands.CreateDeliveryRequest
+namespace OzonEdu.StockApi.Application.Commands.CreateDeliveryRequest
 {
 	/// <summary>
 	/// Команда создания запроса на доставку

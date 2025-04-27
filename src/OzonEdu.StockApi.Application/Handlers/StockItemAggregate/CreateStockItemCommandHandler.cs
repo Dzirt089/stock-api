@@ -1,9 +1,9 @@
 ﻿using MediatR;
 
+using OzonEdu.StockApi.Application.Commands.CreateStockItem;
 using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
-using OzonEdu.StockApi.Infrastructure.Commands.CreateStockItem;
 
-namespace OzonEdu.StockApi.Infrastructure.Handlers.StockItemAggregate
+namespace OzonEdu.StockApi.Application.Handlers.StockItemAggregate
 {
 	public class CreateStockItemCommandHandler : IRequestHandler<CreateStockItemCommand, int>
 	{

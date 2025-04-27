@@ -2,7 +2,7 @@
 
 using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
 
-namespace OzonEdu.StockApi.Infrastructure.Commands.CreateStockItem
+namespace OzonEdu.StockApi.Application.Commands.CreateStockItem
 {
 	/// <summary>
 	/// Команда "Создать товар на складе"

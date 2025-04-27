@@ -1,10 +1,10 @@
 ﻿using MediatR;
 
+using OzonEdu.StockApi.Application.Commands.CreateDeliveryRequest;
 using OzonEdu.StockApi.Domain.AggregationModels.DeliveryRequestAggregate;
 using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
-using OzonEdu.StockApi.Infrastructure.Commands.CreateDeliveryRequest;
 
-namespace OzonEdu.StockApi.Infrastructure.Handlers.DeliveryRequestAggregate
+namespace OzonEdu.StockApi.Application.Handlers.DeliveryRequestAggregate
 {
 	public sealed class CreateDeliveryRequestCommandHandler : IRequestHandler<CreateDeliveryRequestCommand, int>
 	{

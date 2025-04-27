@@ -14,6 +14,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OzonEdu.StockApi.Application\OzonEdu.StockApi.Application.csproj" />
     <ProjectReference Include="..\OzonEdu.StockApi.Grpc\OzonEdu.StockApi.Grpc.csproj">
 		<!-- берём только код и runtime-артефакты, без contentFiles -->
 		<IncludeAssets>Compile;Runtime</IncludeAssets>

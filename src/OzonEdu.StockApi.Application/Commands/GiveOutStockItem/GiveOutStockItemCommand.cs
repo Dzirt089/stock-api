@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-using OzonEdu.StockApi.Infrastructure.Models;
+using OzonEdu.StockApi.Application.Models;
 
-namespace OzonEdu.StockApi.Infrastructure.Commands.GiveOutStockItem
+namespace OzonEdu.StockApi.Application.Commands.GiveOutStockItem
 {
 	/// <summary>
 	/// Команду на выдачу товара на складе

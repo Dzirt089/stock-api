@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 
+using OzonEdu.StockApi.Application.Handlers.StockItemAggregate;
 using OzonEdu.StockApi.Infrastructure.Fillters;
-using OzonEdu.StockApi.Infrastructure.Handlers.StockItemAggregate;
 using OzonEdu.StockApi.Infrastructure.StartupFilters;
 using OzonEdu.StockApi.Infrastructure.Swagger;
 
