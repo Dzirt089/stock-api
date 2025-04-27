@@ -2,6 +2,6 @@
 {
 	public interface IItemsModel<TItemsModel> where TItemsModel : class
 	{
-		IReadOnlyList<TItemsModel> Items { get; set; }
+		IReadOnlyList<TItemsModel> Items { get; init; }
 	}
 }

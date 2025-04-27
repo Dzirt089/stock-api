@@ -6,7 +6,7 @@ using OzonEdu.StockApi.Infrastructure.Commands.CreateDeliveryRequest;
 
 namespace OzonEdu.StockApi.Infrastructure.Handlers.DeliveryRequestAggregate
 {
-	public class CreateDeliveryRequestCommandHandler : IRequestHandler<CreateDeliveryRequestCommand>
+	public sealed class CreateDeliveryRequestCommandHandler : IRequestHandler<CreateDeliveryRequestCommand, int>
 	{
 		private readonly IDeliveryRequestRepository _deliveryRequestRepository;
 
@@ -15,7 +15,7 @@ namespace OzonEdu.StockApi.Infrastructure.Handlers.DeliveryRequestAggregate
 			_deliveryRequestRepository = deliveryRequestRepository;
 		}
 
-		public async Task Handle(CreateDeliveryRequestCommand request, CancellationToken cancellationToken)
+		public async Task<int> Handle(CreateDeliveryRequestCommand request, CancellationToken cancellationToken)
 		{
 			var deliveryRequests = new DeliveryRequest(
 				null,

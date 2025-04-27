@@ -5,7 +5,7 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate.DomainEve
 	/// <summary>
 	/// Достигнуто минимальное количество товаров на складе DomainEvent
 	/// </summary>
-	public class ReachedMinimumStockItemsNumberDomainEvent : INotification
+	public sealed record ReachedMinimumStockItemsNumberDomainEvent : INotification
 	{
 		public ReachedMinimumStockItemsNumberDomainEvent(Sku stockItemSku)
 		{

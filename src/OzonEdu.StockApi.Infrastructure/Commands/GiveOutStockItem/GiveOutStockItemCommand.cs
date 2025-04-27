@@ -4,8 +4,11 @@ using OzonEdu.StockApi.Infrastructure.Models;
 
 namespace OzonEdu.StockApi.Infrastructure.Commands.GiveOutStockItem
 {
-	public class GiveOutStockItemCommand : IRequest
+	/// <summary>
+	/// Команду на выдачу товара на складе
+	/// </summary>
+	public record GiveOutStockItemCommand : IRequest
 	{
-		public IReadOnlyList<StockItemQuantityDto> Items { get; set; }
+		public IReadOnlyList<StockItemQuantityDto> Items { get; init; }
 	}
 }

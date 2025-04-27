@@ -7,7 +7,7 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.DeliveryRequestAggregate.Dom
 	/// <summary>
 	/// Пришла поставка с новыми товарами
 	/// </summary>
-	public class SupplyArrivedWithStockItemsDomainEvent : INotification
+	public sealed record SupplyArrivedWithStockItemsDomainEvent : INotification
 	{
 		public SupplyArrivedWithStockItemsDomainEvent(Sku stockItemSku, Quantity quantity)
 		{

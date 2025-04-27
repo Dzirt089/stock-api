@@ -6,6 +6,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Queries\" />
+    <Folder Include="Repositories\Implementation\" />
+    <Folder Include="Repositories\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="9.0.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OzonEdu.StockApi.Domain\OzonEdu.StockApi.Domain.csproj" />

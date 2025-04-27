@@ -4,41 +4,44 @@ using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
 
 namespace OzonEdu.StockApi.Infrastructure.Commands.CreateStockItem
 {
-	public class CreateStockItemCommand : IRequest<int>
+	/// <summary>
+	/// Команда "Создать товар на складе"
+	/// </summary>
+	public record CreateStockItemCommand : IRequest<int>
 	{
 		/// <summary>
 		/// Идентификатор нового товара
 		/// </summary>
-		public long Sku { get; set; }
+		public long Sku { get; init; }
 
 		/// <summary>
 		/// Название позиции
 		/// </summary>
-		public string Name { get; set; }
+		public string Name { get; init; }
 
 		/// <summary>
 		/// Тип позиции
 		/// </summary>
-		public ItemType StockItemType { get; set; }
+		public ItemType StockItemType { get; init; }
 
 		/// <summary>
 		/// Размер позиции, если это одежда
 		/// </summary>
-		public ClothingSize ClothingSize { get; set; }
+		public ClothingSize ClothingSize { get; init; }
 
 		/// <summary>
 		/// Количество элементов в наличии
 		/// </summary>
-		public int Quantity { get; set; }
+		public int Quantity { get; init; }
 
 		/// <summary>
 		/// Минимальное количество позиций
 		/// </summary>
-		public int? MinimalQuantity { get; set; }
+		public int? MinimalQuantity { get; init; }
 
 		/// <summary>
 		/// Дополнительные теги
 		/// </summary>
-		public string Tags { get; set; }
+		public string Tags { get; init; }
 	}
 }
