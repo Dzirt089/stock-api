@@ -4,12 +4,48 @@ using OzonEdu.StockApi.Domain.Root.Exceptions.StockItemAggregate;
 
 namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 {
+	// Табличка skus.
+	// Табличка, в которой содержится информация о товарах.
+	// id - bigserial
+	// name - text
+	// item_type_id - int -- ссылка на другую табличку.
+	// clothing_size - int nullable -- отдельная табличка?
+
+	// Табличка stocks
+	// Табличка, которая говорит о том, в каком количестве товары.
+	// id - bigserial
+	// sku_id - bigint
+	// quantity - int
+	// minimal_quantity - int
+
+	// Табличка item_types
+	// Словарь с типами товаров.
+	// id - int
+	// name - text
+
+	// Табличка clothing_sizes
+	// Словарь с размерами.
+	// id - int
+	// name - text
+
+	// Табличка delivery_requests
+	// Табличка, которая хранит инофрмацию о заявках на новую поставку товаров.
+	// id - bigserial
+	// request_id - bigint -- айдишник, возвращаемый с supply сервиса.
+	// request_status - int -- Просто статус. Без отдельной таблички.
+
+	// Табличка delivery_request_sku_maps
+	// Табличка связи между запросом на поставку и sku.
+	// delivery_requests_id - bigint -- составной ключ
+	// sku_id - bigint -- составной ключ
+
+
 	/// <summary>
 	/// Элемент на склада (Основная Domain Model)
 	/// Основной частью этого приложения является Domain элемента склада StockItem.
 	/// Наследование от Entity даёт доп. обёртку по сравнению, по наличию Domain Client и всего такого. 
 	/// </summary>
-	public class StockItem : Entity
+	public class StockItem : Entity, IAggregationRoot
 	{
 		public StockItem(Sku sku,
 			Name name,
@@ -130,7 +166,7 @@ namespace OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate
 		private void AddReachedMinimumDomainEvent(Sku sku)
 		{
 			var orderStartedDomainEvent = new ReachedMinimumStockItemsNumberDomainEvent(sku);
-			this.AddDomainEvent(orderStartedDomainEvent);
+			AddDomainEvent(orderStartedDomainEvent);
 		}
 	}
 }

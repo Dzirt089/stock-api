@@ -1,11 +1,9 @@
-﻿namespace OzonEdu.StockApi.Domain.Contracts
+﻿using OzonEdu.StockApi.Domain.Root;
+
+namespace OzonEdu.StockApi.Domain.Contracts
 {
-	public interface IRepository<TAggregationRoot>
+	public interface IRepository<TEntity> where TEntity : Entity
 	{
-		/// <summary>
-		/// Объект <see cref="IUnitOfWork"/>
-		/// </summary>
-		IUnitOfWork UnitOfWork { get; }
 
 		/// <summary>
 		/// Создание новой сущности
@@ -13,7 +11,7 @@
 		/// <param name="aggregationRoot">Объект на создание</param>
 		/// <param name="cancellationToken">Токен отмены</param>
 		/// <returns>Созданная сущность</returns>
-		Task<TAggregationRoot> CreateAsync(TAggregationRoot aggregationRoot, CancellationToken cancellationToken = default);
+		Task<TEntity> CreateAsync(TEntity aggregationRoot, CancellationToken cancellationToken = default);
 
 		/// <summary>
 		/// Обновление сущности
@@ -21,6 +19,6 @@
 		/// <param name="aggregationRoot">Объект на обновление</param>
 		/// <param name="cancellationToken">Токен отмены</param>
 		/// <returns>Измененная сущность</returns>
-		Task<TAggregationRoot> UpdateAsync(TAggregationRoot aggregationRoot, CancellationToken cancellationToken = default);
+		Task<TEntity> UpdateAsync(TEntity aggregationRoot, CancellationToken cancellationToken = default);
 	}
 }

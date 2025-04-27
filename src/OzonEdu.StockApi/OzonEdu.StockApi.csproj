@@ -14,17 +14,21 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OzonEdu.StockApi.Grpc\OzonEdu.StockApi.Grpc.csproj" >
+    <ProjectReference Include="..\OzonEdu.StockApi.Grpc\OzonEdu.StockApi.Grpc.csproj">
 		<!-- берём только код и runtime-артефакты, без contentFiles -->
 		<IncludeAssets>Compile;Runtime</IncludeAssets>
 	</ProjectReference>
-    <ProjectReference Include="..\OzonEdu.StockApi.Infrastructure\OzonEdu.StockApi.Infrastructure.csproj" > 
+    <ProjectReference Include="..\OzonEdu.StockApi.Infrastructure\OzonEdu.StockApi.Infrastructure.csproj"> 
         <!-- берём только код и runtime-артефакты, без contentFiles -->
 		<IncludeAssets>Compile;Runtime</IncludeAssets>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
 	  <!-- Явное исключение файлов настроек -->
-	  <Content Remove="appsettings*.json"/>
+	  <Content Remove="appsettings*.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appsettings.Development.json" />
+    <Content Include="appsettings.json" />
   </ItemGroup>
 </Project>

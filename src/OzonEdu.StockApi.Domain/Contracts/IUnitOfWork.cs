@@ -1,14 +1,17 @@
 ﻿namespace OzonEdu.StockApi.Domain.Contracts
 {
-	public interface IUnitOfWork
+	public interface IUnitOfWork : IDisposable
 	{
-		Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+		/// <summary>
+		/// Начало транзакции для всех действий разом (Репозитории, Евенты)
+		/// </summary>
+		ValueTask StartTransaction(CancellationToken cancellationToken);
 
 		/// <summary>
 		/// Комитим все изменения
 		/// </summary>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		Task<int> SaveEntitiesAsync(CancellationToken cancellationToken = default);
+		Task SaveChangesAsync(CancellationToken cancellationToken);
 	}
 }

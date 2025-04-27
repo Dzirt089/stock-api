@@ -9,6 +9,8 @@ services:
     ports:
       - "5070:5000"
       - "5072:5002"
+    environment:
+      DatabaseConnectionOptions__ConnectionString: "Host=host.docker.internal;Port=5426;Database=stock-api;Username=postgres;Password=stockApiPassword"
 
   stock-api-db:
     image: postgres:latest

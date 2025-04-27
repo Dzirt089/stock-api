@@ -1,10 +1,11 @@
 ﻿using MediatR;
 
+using OzonEdu.StockApi.Infrastructure.Models;
+
 namespace OzonEdu.StockApi.Infrastructure.Commands.GiveOutStockItem
 {
 	public class GiveOutStockItemCommand : IRequest
 	{
-		public long Sku { get; set; }
-		public int Quantity { get; set; }
+		public IReadOnlyList<StockItemQuantityDto> Items { get; set; }
 	}
 }
