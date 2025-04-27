@@ -1,7 +1,5 @@
 ﻿using MediatR;
 
-using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
-
 namespace OzonEdu.StockApi.Application.Commands.CreateStockItem
 {
 	/// <summary>
@@ -22,12 +20,12 @@ namespace OzonEdu.StockApi.Application.Commands.CreateStockItem
 		/// <summary>
 		/// Тип позиции
 		/// </summary>
-		public ItemType StockItemType { get; init; }
+		public int StockItemType { get; init; }
 
 		/// <summary>
 		/// Размер позиции, если это одежда
 		/// </summary>
-		public ClothingSize ClothingSize { get; init; }
+		public int ClothingSize { get; init; }
 
 		/// <summary>
 		/// Количество элементов в наличии

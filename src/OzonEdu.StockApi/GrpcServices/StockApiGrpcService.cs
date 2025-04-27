@@ -2,108 +2,125 @@
 
 using Grpc.Core;
 
+using MediatR;
+
+using OzonEdu.StockApi.Application.Commands.GiveOutStockItem;
+using OzonEdu.StockApi.Application.Models;
+using OzonEdu.StockApi.Application.Queries.StockItemAggregate;
+using OzonEdu.StockApi.Application.Queries.StockItemAggregate.Responses;
 using OzonEdu.StockApi.Grpc;
-using OzonEdu.StockApi.Models;
-using OzonEdu.StockApi.Services.Interfaces;
 namespace OzonEdu.StockApi.GrpcServices
 {
 	public class StockApiGrpcService : StockApiGrpc.StockApiGrpcBase
 	{
-		private readonly IStockService _stockService;
+		private readonly IMediator _mediator;
 
-		public StockApiGrpcService(IStockService stockService)
+		public StockApiGrpcService(IMediator mediator)
 		{
-			_stockService = stockService;
+			_mediator = mediator;
 		}
 
-		public override async Task<GetAllStockItemsResponse> GetAllStockItems(
-			GetAllStockItemsRequest request,
+		public override async Task<StockItemsResponse> GetAllStockItems(
+			Empty _,
 			ServerCallContext context)
 		{
-			var stockItems = await _stockService.GetAll(context.CancellationToken);
-			return new GetAllStockItemsResponse
+			GetAllStockItemsQueryResponse? response = await _mediator.Send(new GetAllStockItemsQuery(), context.CancellationToken);
+
+			return new StockItemsResponse
 			{
-				Stocks = {stockItems.Select(x=> new GetAllStockItemsResponseUnit
+				Items =
 				{
-					ItemId = x.Id,
-					ItemName = x.ItemName,
-					Quantity = x.Qiantity
-				})}
+					response.Items.Select(x => new StockItemUnit
+						{
+							Quantity = x.Quantity,
+							Sku = x.Sku,
+							ItemName = x.Name,
+							ItemTypeId = x.ItemTypeId
+						})}
 			};
 		}
-
-		public override async Task<GetAllStockItemsWithNullsResponse> GetAllStockItemsWithNulls(Empty request, ServerCallContext context)
+		public override async Task<ItemTypesResult> GetItemTypes(Empty request, ServerCallContext context)
 		{
-			var stockItems = await _stockService.GetAll(context.CancellationToken);
-			return new GetAllStockItemsWithNullsResponse
+			var response = await _mediator.Send(new GetItemTypesQuery(), context.CancellationToken);
+			return new ItemTypesResult
 			{
-				Stocks = {stockItems.Select(x=> new GetAllStockItemsWithNullsResponseUnit
+				Items =
 				{
-					ItemId = x.Id,
-					ItemName = x.ItemName,
-					Quantity = x.Qiantity
-				})}
-			};
-		}
-
-		public override async Task<GetAllStockItemsMapResponse> GetAllStockItemsMap(Empty request, ServerCallContext context)
-		{
-			var stockItems = await _stockService.GetAll(context.CancellationToken);
-			return new GetAllStockItemsMapResponse
-			{
-				Stocks = { stockItems.ToDictionary(x=>x.Id, x=> new GetAllStockItemsResponseUnit
-				{
-					ItemId = x.Id,
-					ItemName = x.ItemName,
-					Quantity = x.Qiantity
-				})}
-			};
-		}
-
-		public override Task<Empty> AddStockItem(AddStockItemRequest request, ServerCallContext context)
-		{
-			throw new RpcException(new Status(StatusCode.InvalidArgument, "validation failed"),
-				new Metadata { new Metadata.Entry("key", "our value") });
-		}
-
-		public override async Task GetAllStockItemsStreaming(
-			GetAllStockItemsRequest request,
-			IServerStreamWriter<GetAllStockItemsResponseUnit> responseStream,
-			ServerCallContext context)
-		{
-			var stockItems = await _stockService.GetAll(context.CancellationToken);
-			foreach (var item in stockItems)
-			{
-				if (context.CancellationToken.IsCancellationRequested)
-				{
-					break;
+					response.Items.Select(
+						it => new ItemTypeModel
+						{
+							Id = it.Id,
+							Name = it.Name
+						})
 				}
-
-				await responseStream.WriteAsync(new GetAllStockItemsResponseUnit
-				{
-					ItemId = item.Id,
-					ItemName = item.ItemName,
-					Quantity = item.Qiantity
-				});
-			}
+			};
 		}
 
-		public override async Task<Empty> AddStockItemsStreaming
-			(IAsyncStreamReader<AddStockItemRequest> requestStream,
+		public override async Task<Empty> GiveOutItems(GiveOutItemsRequest request, ServerCallContext context)
+		{
+			await _mediator.Send(
+				new GiveOutStockItemCommand
+				{
+					Items = request.Items.Select(
+							it => new StockItemQuantityDto
+							{
+								Quantity = it.Quantity,
+								Sku = it.Sku
+							})
+						.ToList()
+				},
+				context.CancellationToken);
+			return new Empty();
+		}
+
+		public override async Task<StockItemsResponse> GetByItemType(IntIdModel request, ServerCallContext context)
+		{
+			var result = await _mediator.Send(
+				new GetByItemTypeQuery
+				{
+					Id = request.Id
+				},
+				context.CancellationToken);
+			return new StockItemsResponse
+			{
+				Items =
+				{
+					result.Items.Select(
+						it => new StockItemUnit
+						{
+							Quantity = it.Quantity,
+							Sku = it.Sku,
+							ItemName = it.Name,
+							ItemTypeId = it.ItemTypeId
+						}
+					)
+				}
+			};
+		}
+
+		public override async Task<StockItemsAvailabilityResponse> GetStockItemsAvailability(
+			SkusRequest request,
 			ServerCallContext context)
 		{
-			while (!context.CancellationToken.IsCancellationRequested)
-			{
-				await requestStream.MoveNext();
-				var currentItem = requestStream.Current;
-
-				await _stockService.Add(new StockItemCreationModel
+			var result = await _mediator.Send(
+				new GetStockItemsAvailableQuantityQuery
 				{
-					Qiantity = currentItem.Quantity,
-					ItemName = currentItem.ItemName,
-				}, context.CancellationToken);
-			}
-			return new Empty();
+					Skus = request.Skus
+				},
+				context.CancellationToken);
+			return new StockItemsAvailabilityResponse
+			{
+				Items =
+				{
+					result.Items.Select(
+						it => new SkuQuantityItem
+						{
+							Quantity = it.Quantity,
+							Sku = it.Sku,
+						}
+					)
+				}
+			};
 		}
 	}
 }

@@ -1,95 +1,73 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
 
-using OzonEdu.StockApi.Models;
-using OzonEdu.StockApi.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+
+using OzonEdu.StockApi.Application.Commands.CreateStockItem;
+
+using OzonEdu.StockApi.Application.Queries.StockItemAggregate;
+using OzonEdu.StockApi.HttpModels;
 
 namespace OzonEdu.StockApi.Controllers
 {
 	[ApiController]
-	[Route("v2/api/stocks")]
-	public class V2StockController : ControllerBase
-	{
-		private readonly IStockService _stockService;
-
-		public V2StockController(IStockService stockService)
-		{
-			_stockService = stockService;
-		}
-
-		[HttpPost]
-		public async Task<ActionResult<StockItem>> Add(StockItemPostViewModelV2 model, CancellationToken token)
-		{
-			var createdStockItem = await _stockService.Add(new StockItemCreationModel
-			{
-				ItemName = model.ItemName,
-				Qiantity = model.Qiantity,
-			}, token);
-
-			return Ok(createdStockItem);
-		}
-	}
-
-
-	[ApiController]
 	[Route("v1/api/stocks")]
+	[Produces("application/json")]
 	public class StockController : ControllerBase
 	{
-		private readonly IStockService _stockService;
+		private readonly IMediator _mediator;
 
-		public StockController(IStockService stockService)
+		public StockController(IMediator mediator)
 		{
-			_stockService = stockService;
+			_mediator = mediator;
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<List<StockItem>>> GetAll(CancellationToken token)
+		public async Task<IActionResult> GetAll(CancellationToken token)
 		{
-			var stockItems = await _stockService.GetAll(token);
-			return Ok(stockItems);
+			// use mediator
+			throw new NotSupportedException();
 		}
 
-		[HttpGet("{id}")]
-		public async Task<ActionResult<StockItem>> GetById(long id, CancellationToken token)
+		[HttpGet("{id:long}")]
+		public async Task<IActionResult> GetById(long id, CancellationToken token)
 		{
-			var stockItem = await _stockService.GetById(id, token);
-
-			if (stockItem is null)
-			{
-				return NotFound();
-			}
-
-			return Ok(stockItem);
+			// use mediator
+			throw new NotSupportedException();
 		}
 
-		[HttpPost]
-		public async Task<ActionResult<StockItem>> Add(StockItemModel model, CancellationToken token)
+		[HttpGet("quantity")]
+		public async Task<StockItemQuantityModel[]> GetAvailableQuantity(long[] sku, CancellationToken token)
 		{
-
-			throw new CustomException();
-			var createdStockItem = await _stockService.Add(new StockItemCreationModel
+			var result = await _mediator.Send(new GetStockItemsAvailableQuantityQuery
 			{
-				ItemName = model.ItemName,
-				Qiantity = model.Qiantity,
+				Skus = sku
 			}, token);
 
-			return Ok(createdStockItem);
+			return result.Items.Select(it => new StockItemQuantityModel
+			{
+				Sku = it.Sku,
+				Quantity = it.Quantity
+			}).ToArray();
 		}
-	}
 
-	public class CustomException : Exception
-	{
-		public CustomException() : base("some custom exception") { }
-	}
-
-	public class StockItemModel()
-	{
-		public string ItemName { get; set; }
-		public int Qiantity { get; set; }
-	}
-
-	public class StockItemPostViewModelV2()
-	{
-		public string ItemName { get; set; }
-		public int Qiantity { get; set; }
+		/// <summary>
+		/// Добавляет stock item.
+		/// </summary>
+		[HttpPost]
+		public async Task<ActionResult<int>> Add(StockItemPostViewModel postViewModel, CancellationToken token)
+		{
+			var createStockItemCommand = new CreateStockItemCommand
+			{
+				Name = postViewModel.Name,
+				Quantity = postViewModel.Quantity,
+				Sku = postViewModel.Sku,
+				Tags = postViewModel.Tags,
+				ClothingSize = postViewModel.ClothingSize,
+				MinimalQuantity = postViewModel.MinimalQuantity,
+				StockItemType = postViewModel.StockItemType
+			};
+			var result = await _mediator.Send(createStockItemCommand, token);
+			return Ok(result);
+		}
 	}
 }

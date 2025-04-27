@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\OzonEdu.StockApi.Domain\OzonEdu.StockApi.Domain.csproj" />
     <ProjectReference Include="..\OzonEdu.StockApi.Infrastructure\OzonEdu.StockApi.Infrastructure.csproj" />
   </ItemGroup>
