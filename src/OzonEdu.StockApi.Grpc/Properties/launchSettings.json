@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "OzonEdu.StockApi.Grpc": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:3847;http://localhost:3848"
+    }
+  }
+}
