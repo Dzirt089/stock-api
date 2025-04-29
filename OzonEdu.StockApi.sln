@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.StockApi.HttpModels
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.StockApi.Application", "src\OzonEdu.StockApi.Application\OzonEdu.StockApi.Application.csproj", "{21EE9101-29D3-44E4-8B3D-0207F4101E01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.StockApi.Migrator", "src\OzonEdu.StockApi.Migrator\OzonEdu.StockApi.Migrator\OzonEdu.StockApi.Migrator.csproj", "{1439BDCE-4F92-40ED-9507-B2EF998C6D15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.StockApi.Migrator", "src\OzonEdu.StockApi.Migrator\OzonEdu.StockApi.Migrator.csproj", "{1439BDCE-4F92-40ED-9507-B2EF998C6D15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
