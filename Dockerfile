@@ -46,5 +46,9 @@ COPY --from=publish /app/publish .
 # Точка, из которой контейнер будет исполняться
 #ENTRYPOINT ["dotnet","OzonEdu.StockApi.dll"]
 
-RUN chmod +x entrypoint.sh
+# Удаляем Windows CR и даём права
+RUN sed -i 's/\r$//' entrypoint.sh \
+ && chmod +x entrypoint.sh
+
+# Запуск скрипта напрямую (JSON-массив для корректной обработки сигналов)
 CMD ["/bin/bash", "entrypoint.sh"]

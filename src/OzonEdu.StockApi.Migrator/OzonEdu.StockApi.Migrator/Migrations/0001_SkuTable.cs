@@ -3,7 +3,7 @@
 namespace OzonEdu.StockApi.Migrator.Migrations
 {
 	[Migration(1)]
-	internal class SkuTable : Migration
+	public class SkuTable : Migration
 	{
 		public override void Down()
 		{
@@ -13,11 +13,12 @@ namespace OzonEdu.StockApi.Migrator.Migrations
 		public override void Up()
 		{
 			Execute.Sql(@"
-				CREATE TABLE if not exists skus(
-					id BIGSERIAL PRIMARY KEY,
-					name TEXT NOT NULL,
-					item_type_id INT NOT NULL,
-					clothing_size INT);");
+                CREATE TABLE if not exists skus(
+                    id BIGSERIAL PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    item_type_id INT NOT NULL,
+                    clothing_size INT);"
+			);
 		}
 	}
 }
