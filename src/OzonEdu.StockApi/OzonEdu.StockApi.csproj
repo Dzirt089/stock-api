@@ -5,9 +5,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>166c98a1-8b89-45ef-9ff7-ebeae956dbaa</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-	<!-- не включать в publish контент из транзитивных (косвенных) ProjectReference -->
-	<DockerfileContext>..\..</DockerfileContext>
-	<DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.66" />
@@ -17,23 +14,9 @@
   <ItemGroup>
     <ProjectReference Include="..\OzonEdu.StockApi.Application\OzonEdu.StockApi.Application.csproj" />
     <ProjectReference Include="..\OzonEdu.StockApi.Domain\OzonEdu.StockApi.Domain.csproj" />
-    <ProjectReference Include="..\OzonEdu.StockApi.Grpc\OzonEdu.StockApi.Grpc.csproj">
-		<!-- берём только код и runtime-артефакты, без contentFiles -->
-		<IncludeAssets>Compile;Runtime</IncludeAssets>
-	</ProjectReference>
+    <ProjectReference Include="..\OzonEdu.StockApi.Grpc\OzonEdu.StockApi.Grpc.csproj"/>
     <ProjectReference Include="..\OzonEdu.StockApi.HttpModels\OzonEdu.StockApi.HttpModels.csproj" />
-    <ProjectReference Include="..\OzonEdu.StockApi.Infrastructure\OzonEdu.StockApi.Infrastructure.csproj"> 
-        <!-- берём только код и runtime-артефакты, без contentFiles -->
-		<IncludeAssets>Compile;Runtime</IncludeAssets>
-    </ProjectReference>
+    <ProjectReference Include="..\OzonEdu.StockApi.Infrastructure\OzonEdu.StockApi.Infrastructure.csproj"/>
     <ProjectReference Include="..\OzonEdu.StockApi.Migrator\OzonEdu.StockApi.Migrator.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-	  <!-- Явное исключение файлов настроек -->
-	  <Content Remove="appsettings*.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="appsettings.Development.json" />
-    <Content Include="appsettings.json" />
-  </ItemGroup>
+  </ItemGroup>	
 </Project>

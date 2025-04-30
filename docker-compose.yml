@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
 
   stock-api:
@@ -8,9 +6,18 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "5070:5000"
-      - "5072:5002"
+      - "5072:5002"    
+    depends_on:
+      stock-api-db:
+        condition: service_healthy
     environment:
-      DatabaseConnectionOptions__ConnectionString: "Host=host.docker.internal;Port=5426;Database=stock-api;Username=postgres;Password=stockApiPassword"
+      DatabaseConnectionOptions__ConnectionString: > 
+        Host=host.docker.internal;
+        Port=5426;
+        Database=stock-api;
+        Username=postgres;
+        Password=stockApiPassword
+    
 
   stock-api-db:
     image: postgres:latest
@@ -21,3 +28,8 @@ services:
       POSTGRES_PASSWORD: stockApiPassword
       POSTGRES_DB: stock-api
     command: "-c log_statement=all"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5

@@ -47,8 +47,7 @@ COPY --from=publish /app/publish .
 #ENTRYPOINT ["dotnet","OzonEdu.StockApi.dll"]
 
 # Удаляем Windows CR и даём права
-RUN sed -i 's/\r$//' entrypoint.sh \
- && chmod +x entrypoint.sh
+RUN chmod +x entrypoint.sh
 
 # Запуск скрипта напрямую (JSON-массив для корректной обработки сигналов)
 CMD ["/bin/bash", "entrypoint.sh"]
