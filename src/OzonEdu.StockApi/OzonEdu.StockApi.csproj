@@ -26,6 +26,7 @@
         <!-- берём только код и runtime-артефакты, без contentFiles -->
 		<IncludeAssets>Compile;Runtime</IncludeAssets>
     </ProjectReference>
+    <ProjectReference Include="..\OzonEdu.StockApi.Migrator\OzonEdu.StockApi.Migrator.csproj" />
   </ItemGroup>
   <ItemGroup>
 	  <!-- Явное исключение файлов настроек -->
