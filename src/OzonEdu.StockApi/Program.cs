@@ -23,6 +23,7 @@ builder.Services.AddInfrastructure();
 builder.Services.AddHttp();
 
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+//Подключение конфигурации ...
 builder.Services.Configure<DatabaseConnectionOptions>(builder.Configuration.GetSection(nameof(DatabaseConnectionOptions)));
 
 builder.Services.AddScoped<IDbConnectionFactory<NpgsqlConnection>, NpgsqlConnectionFactory>();

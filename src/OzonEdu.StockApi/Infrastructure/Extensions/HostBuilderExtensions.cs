@@ -2,7 +2,7 @@
 using Microsoft.OpenApi.Models;
 
 using OzonEdu.StockApi.Infrastructure.Fillters;
-using OzonEdu.StockApi.Infrastructure.Middlewares;
+using OzonEdu.StockApi.Infrastructure.Interceptions;
 using OzonEdu.StockApi.Infrastructure.StartupFilters;
 using OzonEdu.StockApi.Infrastructure.Swagger;
 

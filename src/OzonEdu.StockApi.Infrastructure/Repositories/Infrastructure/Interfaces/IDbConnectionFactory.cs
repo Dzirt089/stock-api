@@ -8,8 +8,8 @@
 		/// <summary>
 		/// Создать подключение к БД.
 		/// </summary>
-		/// <param name="connection"></param>
+		/// <param name="token"></param>
 		/// <returns></returns>
-		Task<TConnection> CreateConnectionAsync(TConnection connection);
+		Task<TConnection> CreateConnectionAsync(CancellationToken token);
 	}
 }
