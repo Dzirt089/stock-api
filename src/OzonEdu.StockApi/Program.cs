@@ -39,7 +39,7 @@ builder.ConfigurePorts();
 var app = builder.Build();
 
 app.UseMiddleware<RequestLoggingMiddleware>();
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapGrpcService<StockApiGrpcService>();
 app.MapControllers();
