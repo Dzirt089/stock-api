@@ -1,7 +1,7 @@
 ﻿namespace OzonEdu.StockApi.Infrastructure.Repositories.Models
 {
 	/// <summary>
-	/// Размер одежды
+	/// Таблица Размер одежды
 	/// </summary>
 	public class ClothingSize
 	{

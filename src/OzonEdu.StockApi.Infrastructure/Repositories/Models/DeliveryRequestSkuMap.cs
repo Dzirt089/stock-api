@@ -1,7 +1,7 @@
 ﻿namespace OzonEdu.StockApi.Infrastructure.Repositories.Models
 {
 	/// <summary>
-	/// Связь между запросом на доставку и артикулом
+	/// Таблица Связь между запросом на доставку и артикулом
 	/// </summary>
 	public class DeliveryRequestSkuMap
 	{

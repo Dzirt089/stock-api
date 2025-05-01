@@ -102,7 +102,7 @@ namespace OzonEdu.StockApi.GrpcServices
 			SkusRequest request,
 			ServerCallContext context)
 		{
-			var result = await _mediator.Send(
+			GetStockItemsAvailableQuantityQueryResponse? result = await _mediator.Send(
 				new GetStockItemsAvailableQuantityQuery
 				{
 					Skus = request.Skus

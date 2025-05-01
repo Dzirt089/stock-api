@@ -1,7 +1,7 @@
 ﻿namespace OzonEdu.StockApi.Infrastructure.Repositories.Models
 {
 	/// <summary>
-	/// Артикул
+	/// Таблица Артикул
 	/// </summary>
 	public class Sku
 	{

@@ -1,7 +1,7 @@
 ﻿namespace OzonEdu.StockApi.Infrastructure.Repositories.Models
 {
 	/// <summary>
-	/// Запрос на доставку
+	/// Таблица Запрос на доставку
 	/// </summary>
 	public class DeliveryRequest
 	{

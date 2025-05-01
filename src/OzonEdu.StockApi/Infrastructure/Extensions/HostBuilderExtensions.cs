@@ -11,6 +11,7 @@ using System.Reflection;
 
 namespace OzonEdu.StockApi.Infrastructure.Extensions
 {
+	//TODO: Ещё раз разобраться с тем, как проходят регистрация всей инфраструктуры
 	public static class HostBuilderExtensions
 	{
 		public static IServiceCollection AddInfrastructure(this IServiceCollection services)

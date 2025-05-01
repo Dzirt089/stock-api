@@ -1,7 +1,7 @@
 ﻿namespace OzonEdu.StockApi.Infrastructure.Repositories.Models
 {
 	/// <summary>
-	/// Тип товара
+	/// Таблица Тип товара
 	/// </summary>
 	public class ItemType
 	{

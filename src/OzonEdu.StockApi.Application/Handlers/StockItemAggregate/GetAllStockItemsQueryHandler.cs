@@ -8,7 +8,7 @@ using OzonEdu.StockApi.Domain.AggregationModels.StockItemAggregate;
 namespace OzonEdu.StockApi.Application.Handlers.StockItemAggregate
 {
 	/// <summary>
-	/// 
+	/// Обработчик запроса на получение всех товарных позиций
 	/// </summary>
 	public class GetAllStockItemsQueryHandler : IRequestHandler<GetAllStockItemsQuery, GetAllStockItemsQueryResponse>
 	{

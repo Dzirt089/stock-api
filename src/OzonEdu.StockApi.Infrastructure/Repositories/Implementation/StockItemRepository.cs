@@ -29,11 +29,44 @@ namespace OzonEdu.StockApi.Infrastructure.Repositories.Implementation
 			throw new NotImplementedException();
 		}
 
-		public Task<IReadOnlyList<StockItem>> FindBySkusAsync(IReadOnlyList<Sku> skus, CancellationToken cancellationToken = default)
+		public async Task<IReadOnlyList<StockItem>> FindBySkusAsync(IReadOnlyList<Sku> skus, CancellationToken cancellationToken = default)
 		{
-			throw new NotImplementedException();
+			string sqlText = $@"
+				SELECT skus.id, skus.name, skus.item_type_id, skus.clothing_size, 
+					stocks.id, stocks.sku_id, stocks.quantity, stocks.minimal_quantity, 
+					item_types.id, item_types.name,
+					clothing_sizes.id, clothing_sizes.name
+				FROM skus
+				INNER JOIN stocks ON stocks.sku_id = skus.id
+				INNER JOIN item_types ON skus.item_type_id = item_types.id 
+				LEFT JOIN clothing_sizes ON skus.clothing_size = clothing_sizes.id
+				WHERE skus.id = ANY (@skus);";
+
+			var connection = await _connectionFactory.CreateConnectionAsync(cancellationToken);
+
+			/// Маппинг результата запроса на объект StockItem из первых 4-х моделей Dto, импользует Dapper.
+			var result = await connection.QueryAsync<
+					Models.Sku, Models.StockItem, Models.ItemType, Models.ClothingSize, StockItem>(sqlText,
+					(sku, stock, itemType, clothingSize) => new StockItem(
+						new Sku(sku.Id),
+						new Name(sku.Name),
+						new Item(new ItemType(itemType.Id, itemType.Name)),
+						clothingSize?.Id is not null ? new ClothingSize(clothingSize.Id.Value, clothingSize.Name) : null,
+						new Quantity(stock.Quantity),
+						new MinimalQuantity(stock.MinimalQuantity)
+						), param: new
+						{
+							skus = skus.Select(x => x.Value).ToList()
+						});
+
+			return result.ToList();
 		}
 
+		/// <summary>
+		/// Получить все товарные позиции
+		/// </summary>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
 		public async Task<IReadOnlyList<StockItem>> GetAllAsync(CancellationToken cancellationToken = default)
 		{
 			const string sqlText = @"
@@ -47,6 +80,8 @@ namespace OzonEdu.StockApi.Infrastructure.Repositories.Implementation
 				LEFT JOIN clothing_sizes ON skus.clothing_size = clothing_sizes.id;";
 
 			var connection = await _connectionFactory.CreateConnectionAsync(cancellationToken);
+
+			/// Маппинг результата запроса на объект StockItem из первых 4-х моделей Dto, импользует Dapper.
 			var result = await connection.QueryAsync<
 					Models.Sku, Models.StockItem, Models.ItemType, Models.ClothingSize, StockItem>(sqlText,
 					(sku, stock, itemType, clothingSize) => new StockItem(
