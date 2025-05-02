@@ -11,7 +11,7 @@ namespace OzonEdu.StockApi.Domain.Contracts
 		/// <param name="aggregationRoot">Объект на создание</param>
 		/// <param name="cancellationToken">Токен отмены</param>
 		/// <returns>Созданная сущность</returns>
-		Task<TEntity> CreateAsync(TEntity aggregationRoot, CancellationToken cancellationToken = default);
+		Task<TEntity> CreateAsync(TEntity itemToCreate, CancellationToken cancellationToken = default);
 
 		/// <summary>
 		/// Обновление сущности
@@ -19,6 +19,6 @@ namespace OzonEdu.StockApi.Domain.Contracts
 		/// <param name="aggregationRoot">Объект на обновление</param>
 		/// <param name="cancellationToken">Токен отмены</param>
 		/// <returns>Измененная сущность</returns>
-		Task<TEntity> UpdateAsync(TEntity aggregationRoot, CancellationToken cancellationToken = default);
+		Task<TEntity> UpdateAsync(TEntity itemToUpdate, CancellationToken cancellationToken = default);
 	}
 }
