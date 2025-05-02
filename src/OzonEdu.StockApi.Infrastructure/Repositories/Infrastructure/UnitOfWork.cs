@@ -66,7 +66,7 @@ namespace OzonEdu.StockApi.Infrastructure.Repositories.Infrastructure
 				await _publisher.Publish(notification, cancellationToken);
 			}
 
-			// Коммитим транзакцию
+			// Коммитим транзакцию 
 			await _transaction.CommitAsync(cancellationToken);
 		}
 

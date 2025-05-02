@@ -33,6 +33,8 @@ builder.Services.AddScoped<IChangeTracker, ChangeTracker>();
 builder.Services.AddScoped<IStockItemRepository, StockItemRepository>();
 builder.Services.AddScoped<IDeliveryRequestRepository, DeliveryRequestRepository>();
 
+builder.Services.AddMemoryCache();
+
 // Для демонстрации.
 builder.Services.AddScoped<IItemTypeRepository, ItemTypeRepository>();
 builder.ConfigurePorts();
