@@ -7,7 +7,7 @@ using OzonEdu.StockApi.Infrastructure.Repositories.Infrastructure.Interfaces;
 namespace OzonEdu.StockApi.Infrastructure.Repositories.Infrastructure
 {
 	/// <summary>
-	/// Класс для работы с транзакциями в БД.
+	/// Класс, реализующий паттерн UnitOfWork. Позволяет объединить несколько операций в одну транзакцию.
 	/// </summary>
 	public class UnitOfWork : IUnitOfWork
 	{
@@ -33,7 +33,7 @@ namespace OzonEdu.StockApi.Infrastructure.Repositories.Infrastructure
 		}
 
 		/// <summary>
-		/// Комитим все изменения в БД
+		/// Коммитим все изменения, которые были сделаны в рамках текущей транзакции.
 		/// </summary>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
