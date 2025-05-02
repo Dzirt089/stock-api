@@ -15,6 +15,10 @@ namespace OzonEdu.StockApi.Application.Handlers.StockItemAggregate
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly IMemoryCache _memoryCache;
 		private const string CacheKey = "ItemTypes";
+		private readonly MemoryCacheEntryOptions _cacheEntryOptions = new MemoryCacheEntryOptions
+		{
+			AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(45)
+		};
 
 		public GetItemTypesQueryHandler(IItemTypeRepository itemTypeRepository, IUnitOfWork unitOfWork, IMemoryCache memoryCache)
 		{
@@ -48,7 +52,7 @@ namespace OzonEdu.StockApi.Application.Handlers.StockItemAggregate
 			await _unitOfWork.SaveChangesAsync(cancellationToken);
 
 			// Сохраняем результат в кэш
-			_memoryCache.Set(CacheKey, itemTypes);
+			_memoryCache.Set(CacheKey, itemTypes, _cacheEntryOptions);
 
 			// Сохраняем результат в переменную
 			var cacheResults = itemTypes.ToList();
