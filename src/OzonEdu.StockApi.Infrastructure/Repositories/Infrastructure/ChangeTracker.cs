@@ -17,9 +17,9 @@ namespace OzonEdu.StockApi.Infrastructure.Repositories.Infrastructure
 
 		private readonly ConcurrentBag<Entity> _trackedEntities;
 
-		public ChangeTracker(ConcurrentBag<Entity> trackedEntities)
+		public ChangeTracker()
 		{
-			_trackedEntities = trackedEntities;
+			_trackedEntities = new ConcurrentBag<Entity>();
 		}
 
 		/// <summary>

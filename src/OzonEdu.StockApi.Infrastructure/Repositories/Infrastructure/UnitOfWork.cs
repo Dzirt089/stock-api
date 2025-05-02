@@ -1,4 +1,6 @@
-﻿using Npgsql;
+﻿using MediatR;
+
+using Npgsql;
 
 using OzonEdu.StockApi.Domain.Contracts;
 using OzonEdu.StockApi.Infrastructure.Repositories.Infrastructure.Exceptions;
@@ -12,11 +14,15 @@ namespace OzonEdu.StockApi.Infrastructure.Repositories.Infrastructure
 	public class UnitOfWork : IUnitOfWork
 	{
 		private readonly IDbConnectionFactory<NpgsqlConnection> _connectionFactory;
+		private readonly IChangeTracker _changeTracker;
+		private readonly IPublisher _publisher;
 		private NpgsqlTransaction _transaction;
 
-		public UnitOfWork(IDbConnectionFactory<NpgsqlConnection> connectionFactory)
+		public UnitOfWork(IDbConnectionFactory<NpgsqlConnection> connectionFactory, IChangeTracker changeTracker, IPublisher publisher)
 		{
 			_connectionFactory = connectionFactory;
+			_changeTracker = changeTracker;
+			_publisher = publisher;
 		}
 
 		/// <summary>
@@ -43,6 +49,24 @@ namespace OzonEdu.StockApi.Infrastructure.Repositories.Infrastructure
 			if (_transaction is null)
 				throw new NoActiveTransactionStartedException();
 
+			// Получаем все доменные события, которые были вызваны в рамках текущей транзакции
+			var domainEvents = new Queue<INotification>(
+				_changeTracker.TrackedEntities.SelectMany(x =>
+				{
+					var domainEvents = x.DomainEvents.ToList();
+					x.ClearDomainEvents();
+					return domainEvents;
+				}));
+
+			// Если нет событий, то просто коммитим транзакцию
+			// Если есть - то сначала публикуем их, а потом коммитим транзакцию
+			while (domainEvents.TryDequeue(out var notification))
+			{
+				// Публикуем каждое событие в MediatR
+				await _publisher.Publish(notification, cancellationToken);
+			}
+
+			// Коммитим транзакцию
 			await _transaction.CommitAsync(cancellationToken);
 		}
 
