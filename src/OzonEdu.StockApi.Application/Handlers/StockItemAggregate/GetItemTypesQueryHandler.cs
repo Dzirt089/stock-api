@@ -15,6 +15,10 @@ namespace OzonEdu.StockApi.Application.Handlers.StockItemAggregate
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly IMemoryCache _memoryCache;
 		private const string CacheKey = "ItemTypes";
+
+		/// <summary>
+		/// Настройки кэша, кэш использовать только на данных, которые редко меняются или меняются вместе с проектом (при рестарте проекта кэш всегда актуальный)
+		/// </summary>
 		private readonly MemoryCacheEntryOptions _cacheEntryOptions = new MemoryCacheEntryOptions
 		{
 			AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(45)
